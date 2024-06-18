@@ -30,7 +30,7 @@ const ComponentPanelRoot = styled('div')(({ theme }) => ({
 export interface ComponentPanelProps {
   className?: string;
 }
-
+//控件属性组件
 export default function ComponentPanel({ className }: ComponentPanelProps) {
   const { dom, currentView } = useAppState();
   const appStateApi = useAppStateApi();

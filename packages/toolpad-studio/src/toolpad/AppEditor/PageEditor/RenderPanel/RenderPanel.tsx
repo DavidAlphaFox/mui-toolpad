@@ -33,7 +33,7 @@ function useRuntimeState(): RuntimeState {
 export interface RenderPanelProps {
   className?: string;
 }
-
+//渲染预览的控件
 export default function RenderPanel({ className }: RenderPanelProps) {
   const appState = useAppState();
   const domApi = useDomApi();

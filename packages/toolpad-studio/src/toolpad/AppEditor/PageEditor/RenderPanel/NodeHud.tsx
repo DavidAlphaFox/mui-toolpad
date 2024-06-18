@@ -239,7 +239,7 @@ export default function NodeHud({
           <ResizePreview ref={resizePreviewElementRef} style={absolutePositionCss(rect)} />
         ) : null}
       </NodeHudWrapper>
-      {isSelected ? (
+      {isSelected ? ( //如果某个组件被选中后，就会出现这个标签
         <SelectionHintWrapper
           style={absolutePositionCss(rect)}
           hintPosition={hintPosition}

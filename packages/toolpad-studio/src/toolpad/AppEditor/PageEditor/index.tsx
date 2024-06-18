@@ -30,7 +30,7 @@ const PageEditorRoot = styled('div')({
 interface PageEditorContentProps {
   node: appDom.PageNode;
 }
-
+//页面编辑器
 function PageEditorContent({ node }: PageEditorContentProps) {
   usePageTitle(`${appDom.getPageTitle(node)} | Toolpad Studio editor`);
   const { currentView } = useAppState();

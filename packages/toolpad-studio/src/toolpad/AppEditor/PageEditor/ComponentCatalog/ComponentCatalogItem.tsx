@@ -96,7 +96,7 @@ interface ComponentCatalogItemProps {
   displayName: string;
   kind?: ComponentItemKind;
 }
-
+//控件列表？
 function ComponentCatalogItem({
   draggable,
   onClick,

@@ -72,7 +72,7 @@ const CanvasFrame = styled('iframe')({
   width: '100%',
   height: '100%',
 });
-
+//排版预览，完全是独立的iframe，这样可以保证主题
 export default function EditorCanvasHost({
   pageName,
   className,
@@ -244,7 +244,7 @@ export default function EditorCanvasHost({
   const page = appDom.getPageByName(runtimeState.dom, pageName);
 
   const appHost = useAppHost();
-
+//使用iframe进行排版预览
   return (
     <CanvasRoot className={className}>
       <CanvasFrame

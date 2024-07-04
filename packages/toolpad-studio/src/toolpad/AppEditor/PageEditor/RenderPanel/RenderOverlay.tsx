@@ -62,7 +62,7 @@ const overlayClasses = {
   resizeHorizontal: 'Toolpad_ResizeHorizontal',
   resizeVertical: 'Toolpad_ResizeVertical',
 };
-
+//页面编辑器的整个外框
 const OverlayRoot = styled('div')({
   pointerEvents: 'none',
   width: '100%',
@@ -269,14 +269,14 @@ export default function RenderOverlay({ bridge }: RenderOverlayProps) {
       ),
     );
   }, [dom, selectedNode]);
-
+  // 拖拽开始处理函数
   const handleNodeDragStart = React.useCallback(
     (node: appDom.ElementNode) => (event: React.DragEvent<HTMLDivElement>) => {
       event.stopPropagation();
 
       if (appDom.isElement(node)) {
-        event.dataTransfer.dropEffect = 'move';
-        selectNode(node.id);
+        event.dataTransfer.dropEffect = 'move'; //设置移动效果
+        selectNode(node.id); //记录选择的ID
         api.existingNodeDragStart(node);
       }
     },
@@ -324,7 +324,7 @@ export default function RenderOverlay({ bridge }: RenderOverlayProps) {
     },
     [dom],
   );
-
+  //对整个节点的边界进行拖拽
   const handleEdgeDragStart = React.useCallback(
     (node: appDom.AppDomNode) =>
       (edge: RectangleEdge) =>
@@ -1425,7 +1425,7 @@ export default function RenderOverlay({ bridge }: RenderOverlayProps) {
     },
     [api, domApi, draggedEdge, draggedNode, nodesInfo],
   );
-
+  //编辑器，页面排版部分
   return (
     <OverlayRoot
       data-testid="page-overlay"
@@ -1497,7 +1497,7 @@ export default function RenderOverlay({ bridge }: RenderOverlayProps) {
         if (!nodeRect) {
           return null;
         }
-
+        //进行多层渲染
         return (
           <React.Fragment key={node.id}>
             {!isPageNode ? (

@@ -20,7 +20,7 @@ export type BuiltinComponentConfig<P extends object> = ComponentConfig<P> & {
   helperText: string;
   argTypes: BuiltinArgTypeDefinitions<P>;
 };
-
+//根据配置，创建一个组建
 export default function createBuiltin<P extends object>(
   Component: React.ComponentType<P>,
   config: BuiltinComponentConfig<P>,

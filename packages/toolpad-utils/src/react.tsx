@@ -83,7 +83,7 @@ export default function getComponentDisplayName(Component: React.ComponentType<a
   }
 
   return Component.displayName || Component.name;
-}
+} //获得组建显示名字
 
 /**
  * Create a shared state to be used across the application. Returns a useState hook that

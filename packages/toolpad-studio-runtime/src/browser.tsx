@@ -31,7 +31,7 @@ export function createComponent<P extends object>(
         delete maybeLegacyArgtype.typeDef;
       }
     }
-  }
+  } //创建一个全新的组件
   return Object.assign(Component, {
     [TOOLPAD_COMPONENT]: config || { argTypes: {} },
   });

@@ -329,17 +329,17 @@ export default function RenderOverlay({ bridge }: RenderOverlayProps) {
     (node: appDom.AppDomNode) =>
       (edge: RectangleEdge) =>
       (event: React.MouseEvent<HTMLElement>) => {
-        event.stopPropagation();
-
+        event.stopPropagation(); //停止冒泡
+        //获取对应节点的父节点
         const parent = appDom.getParent(dom, node);
-
+        //判断是否是列节点和是否可以进行垂直伸缩
         const isPageColumnChild = parent ? appDom.isElement(parent) && isPageColumn(parent) : false;
-        const isResizingVertically = edge === RECTANGLE_EDGE_TOP || edge === RECTANGLE_EDGE_BOTTOM;
-
+        const isResizingVertically = edge === RECTANGLE_EDGE_TOP || edge === RECTANGLE_EDGE_BOTTOM; //只有在底边和顶部才可以进行垂直伸缩
+        //有父节点，是列元素的子元素，并且不能垂直伸缩，那么这个操作将父元素进行，否则将对子元素进行
         const nodeToResize = parent && isPageColumnChild && !isResizingVertically ? parent : node;
-
+        //更新拖拽节点的信息
         api.edgeDragStart({ nodeId: nodeToResize.id, edge });
-
+        //选中对应元素
         selectNode(nodeToResize.id);
       },
     [api, dom, selectNode],
@@ -1454,15 +1454,16 @@ export default function RenderOverlay({ bridge }: RenderOverlayProps) {
             onMouseUp: handleNodeMouseUp,
           })}
     >
+      //将页面的元素逐个层级进行渲染
       {pageNodes.map((node) => {
-        const nodeInfo = nodesInfo[node.id];
-        const nodeRect = nodeInfo?.rect || null;
+        const nodeInfo = nodesInfo[node.id]; //通过节点ID获取节点的信息
+        const nodeRect = nodeInfo?.rect || null; //获取节点的区域大小
 
-        const parent = appDom.getParent(dom, node);
+        const parent = appDom.getParent(dom, node);//获取父亲节点
 
-        const isPageNode = appDom.isPage(node);
-        const isElementNode = appDom.isElement(node);
-
+        const isPageNode = appDom.isPage(node); //是否是页面节点
+        const isElementNode = appDom.isElement(node); //是否是元素节点
+        //检查节点是否是行或者列的子元素
         const isPageRowChild = parent ? appDom.isElement(parent) && isPageRow(parent) : false;
         const isPageColumnChild = parent ? appDom.isElement(parent) && isPageColumn(parent) : false;
 
@@ -1472,26 +1473,26 @@ export default function RenderOverlay({ bridge }: RenderOverlayProps) {
         //   parent && appDom.isElement(parent) && nodeParentProp
         //     ? appDom.getNodeFirstChild(dom, parent, nodeParentProp)?.id === node.id
         //     : false;
-
+        //判断是否是被选中的节点，或者是Hover的节点
         const isSelected = selectedNode && !newNode ? selectedNode.id === node.id : false;
         const isHovered = hoveredNodeId === node.id;
-
+        //判断是否可以进行水平的伸缩
         const isHorizontallyResizable = isPageRowChild || isPageColumnChild;
-
+        //得到节点的元素类型
         const nodeComponentId = isElementNode ? getElementNodeComponentId(node) : null;
-
+        //判断是否可以进行垂直的伸缩
         // @TODO: Enable vertical resizing for all component types when there is a better solution for adjusting size of other elements in same row after resizing
         const isVerticallyResizable =
           isElementNode &&
           !isPageRow(node) &&
-          !isPageColumn(node) &&
+          !isPageColumn(node) && //不可以是页面的行列元素
           (nodeComponentId === 'Chart' ||
             nodeComponentId === 'DataGrid' ||
             nodeComponentId === 'Spacer');
 
-        const isResizing = Boolean(draggedEdge);
-        const isResizingNode = isResizing && node.id === draggedNodeId;
-
+        const isResizing = Boolean(draggedEdge); //判断当前是否在进行缩放操作
+        const isResizingNode = isResizing && node.id === draggedNodeId; //当前节点是正在进行缩放操作的节点
+        //当前节点时候是被正在操作中的节点所影响，当前节点不能是正在缩放或者正在拖拽的
         const isInteractive = interactiveNodes.has(node.id) && !isResizing && !isDraggingOver;
 
         if (!nodeRect) {

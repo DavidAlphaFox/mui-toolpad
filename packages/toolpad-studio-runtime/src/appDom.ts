@@ -51,7 +51,7 @@ export interface ConnectionStatus {
   timestamp: number;
   error?: string;
 }
-
+//DOM元素类型一种是页面元素，一种是普通组件是拖拽的核心
 type AppDomNodeType = 'app' | 'connection' | 'theme' | 'page' | 'element' | 'query' | 'mutation';
 
 export interface AppDomNodeBase {
@@ -275,7 +275,7 @@ export function getMaybeNode<T extends AppDomNodeType>(
   nodeId: NodeId,
   type?: T,
 ): AppDomNode | null {
-  const node = dom.nodes[nodeId];
+  const node = dom.nodes[nodeId]; //从Dom中根据NodeID获取对应节点
   if (!node) {
     return null;
   }
@@ -415,11 +415,11 @@ export function getChildNodes<N extends AppDomNode>(dom: AppDom, parent: N): Nod
 
   return result;
 }
-
+//通过Dom数据和Node数据获取对应Node的父节点
 export function getParent<N extends AppDomNode>(dom: AppDom, child: N): ParentOf<N> {
   // Make sure we're using the last version of child in the dom
-  child = getNode(dom, child.id, child.type) as N;
-  if (child.parentId) {
+  child = getNode(dom, child.id, child.type) as N; //得到child在Dom信息
+  if (child.parentId) { //如果节点有父节点信息，就去获取父节点
     const parent = getNode(dom, child.parentId);
     return parent as ParentOf<N>;
   }

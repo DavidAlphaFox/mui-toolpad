@@ -136,7 +136,7 @@ export function pageEditorReducer(
     }
     case 'PAGE_EDGE_DRAG_START': {
       const { nodeId, edge } = action.edgeDragState;
-
+      //更新正在操作的节点和对应的边界
       return update(state, {
         draggedNodeId: nodeId,
         draggedEdge: edge,
@@ -269,7 +269,7 @@ function createPageEditorApi(dispatch: React.Dispatch<PageEditorAction>) {
 }
 
 const PageEditorContext = React.createContext<PageEditorState | null>(null);
-
+//编辑页面的整个页面状态信息，它使用的是Context数据进行传输
 export function usePageEditorState() {
   const state = React.useContext(PageEditorContext);
 

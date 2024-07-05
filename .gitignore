@@ -68,3 +68,4 @@ test-results
 .github/styles/.vale-config
 
 .idea
+.coverage

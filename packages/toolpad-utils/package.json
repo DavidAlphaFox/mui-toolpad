@@ -1,6 +1,6 @@
 {
   "name": "@toolpad/utils",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Shared utilities used by Toolpad packages.",
   "author": "MUI Toolpad team",
   "homepage": "https://github.com/mui/mui-toolpad#readme",
@@ -45,7 +45,7 @@
     "build": "tsup",
     "dev": "tsup --watch",
     "check-types": "tsup && tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run --coverage"
   },
   "bugs": {
     "url": "https://github.com/mui/mui-toolpad/issues"

@@ -493,20 +493,20 @@ export default function RenderOverlay({ bridge }: RenderOverlayProps) {
 
   const dropAreaRects = React.useMemo(() => {
     const rects: Record<string, Rectangle> = {};
-
+    //计算放置区域
     pageNodes.forEach((node) => {
       const nodeId = node.id;
       const nodeInfo = nodesInfo[nodeId];
 
-      const nodeRect = nodeInfo?.rect;
+      const nodeRect = nodeInfo?.rect; //获取节点的区域
 
-      const nodeParentProp = node.parentProp;
+      const nodeParentProp = node.parentProp; //节点的父属性
 
       const nodeSlots = nodeInfo?.slots || [];
       const nodeSlotEntries = Object.entries(nodeSlots);
 
       const hasFreeSlots = nodeSlotEntries.length > 0;
-
+      //计算基本区域
       const baseRects = [
         nodeRect,
         ...nodeSlotEntries.map(([, slot]) => (slot ? slot.rect : null)).filter(Boolean),
@@ -516,7 +516,7 @@ export default function RenderOverlay({ bridge }: RenderOverlayProps) {
         const parent = appDom.getParent(dom, node);
         const parentInfo = parent && nodesInfo[parent.id];
 
-        const parentRect = parentInfo?.rect;
+        const parentRect = parentInfo?.rect; //父节点的区域
 
         const parentProp = hasFreeSlots ? Object.keys(nodeSlots)[baseRectIndex - 1] : null;
 
@@ -814,7 +814,7 @@ export default function RenderOverlay({ bridge }: RenderOverlayProps) {
       api,
     ],
   );
-
+  //当组件放下时候进行的处理
   const handleNodeDrop = React.useCallback(
     (event: React.DragEvent<Element>) => {
       const cursorPos = bridge?.canvasCommands.getViewCoordinates(event.clientX, event.clientY);
@@ -828,13 +828,13 @@ export default function RenderOverlay({ bridge }: RenderOverlayProps) {
       ) {
         return;
       }
-
+      //得到有效放置的目标节点
       let dragOverNode = appDom.getNode(dom, dragOverNodeId) as appDom.ElementNode;
 
       if (!appDom.isElement(dragOverNode) && !appDom.isPage(dragOverNode)) {
         return;
       }
-
+      //得到有效放置目标节点的信息
       const dragOverNodeInfo = nodesInfo[dragOverNodeId];
 
       const dragOverNodeParentProp =
@@ -1488,7 +1488,7 @@ export default function RenderOverlay({ bridge }: RenderOverlayProps) {
           !isPageColumn(node) && //不可以是页面的行列元素
           (nodeComponentId === 'Chart' ||
             nodeComponentId === 'DataGrid' ||
-            nodeComponentId === 'Spacer');
+            nodeComponentId === 'Spacer'); //对3个特殊控件进行特殊处理，是准许它们进行垂直伸缩的
 
         const isResizing = Boolean(draggedEdge); //判断当前是否在进行缩放操作
         const isResizingNode = isResizing && node.id === draggedNodeId; //当前节点是正在进行缩放操作的节点

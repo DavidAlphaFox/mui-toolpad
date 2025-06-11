@@ -76,3 +76,5 @@ test-results
 .github/styles/Google
 .github/styles/MUI
 .github/styles/.vale-config
+
+\.idea

@@ -149,7 +149,7 @@ interface NodeDropAreaProps {
   dropAreaRect: Rectangle;
   availableDropZones: DropZone[];
 }
-
+// 放置组件的节点区域
 export default function NodeDropArea({
   node,
   parentProp,

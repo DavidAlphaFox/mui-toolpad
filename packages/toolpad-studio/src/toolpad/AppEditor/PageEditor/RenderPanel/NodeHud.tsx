@@ -30,7 +30,7 @@ const nodeHudClasses = {
   hovered: 'NodeHud_Hovered',
   selectionHint: 'NodeHud_SelectionHint',
 };
-
+//每个组件的占位区域，当hover上会用虚线显示大小
 const NodeHudWrapper = styled('div', {
   shouldForwardProp: (prop) => prop !== 'isOutlineVisible' && prop !== 'isHoverable',
 })<{
@@ -62,7 +62,7 @@ const NodeHudWrapper = styled('div', {
     },
   };
 });
-
+//当某个组件节点被选中后，该节点显示的提示标签
 const SelectionHintWrapper = styled('div', {
   shouldForwardProp: (prop) => prop !== 'hintPosition',
 })<{
@@ -91,13 +91,13 @@ const SelectionHintWrapper = styled('div', {
         }),
   },
 }));
-
+//调整组件边界的一个包装
 const DraggableEdgeWrapper = styled('div')({
   userSelect: 'none',
   position: 'absolute',
   zIndex: 90,
 });
-
+//拖拽边界的真正控件，用来显示背景
 const DraggableEdge = styled('div', {
   shouldForwardProp: (prop) => prop !== 'edge',
 })<{
@@ -148,7 +148,7 @@ const DraggableEdge = styled('div', {
     zIndex: 90,
   };
 });
-
+//对组件进行Resize的时候，就会变更背景
 const ResizePreview = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.primary[500],
   opacity: 0.2,

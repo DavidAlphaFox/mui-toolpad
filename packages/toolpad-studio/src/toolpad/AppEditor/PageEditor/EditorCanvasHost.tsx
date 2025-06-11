@@ -101,7 +101,7 @@ interface OverlayProps {
   children?: React.ReactNode;
   container?: HTMLElement;
 }
-
+//编辑器的内容区域
 function Overlay(props: OverlayProps) {
   const { children, container } = props;
 

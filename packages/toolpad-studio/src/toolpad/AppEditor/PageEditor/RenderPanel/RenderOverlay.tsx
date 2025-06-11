@@ -296,7 +296,7 @@ export default function RenderOverlay({ bridge }: RenderOverlayProps) {
     },
     [domApi, pageNode],
   );
-
+  //计算可拖拽的方向
   const getNodeDraggableHorizontalEdges = React.useCallback(
     (node: appDom.AppDomNode): RectangleEdge[] => {
       const nodeParentProp = node.parentProp;
@@ -324,13 +324,13 @@ export default function RenderOverlay({ bridge }: RenderOverlayProps) {
     },
     [dom],
   );
-
+  // 处理拖拽事件
   const handleEdgeDragStart = React.useCallback(
     (node: appDom.AppDomNode) =>
       (edge: RectangleEdge) =>
       (event: React.MouseEvent<HTMLElement>) => {
         event.stopPropagation();
-
+        //得到该节点的父亲节点
         const parent = appDom.getParent(dom, node);
 
         const isPageColumnChild = parent ? appDom.isElement(parent) && isPageColumn(parent) : false;

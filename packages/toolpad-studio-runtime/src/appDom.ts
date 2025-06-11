@@ -415,7 +415,7 @@ export function getChildNodes<N extends AppDomNode>(dom: AppDom, parent: N): Nod
 
   return result;
 }
-
+//获得某个节点的父亲节点
 export function getParent<N extends AppDomNode>(dom: AppDom, child: N): ParentOf<N> {
   // Make sure we're using the last version of child in the dom
   child = getNode(dom, child.id, child.type) as N;
